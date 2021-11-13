@@ -46,7 +46,9 @@ const SearchBooks = () => {
         authors: book.volumeInfo.authors || ['No author to display'],
         title: book.volumeInfo.title,
         description: book.volumeInfo.description,
-        image: book.volumeInfo.imageLinks?.thumbnail || '',
+        // Changed thumbnail to find higher quality image. Volumes only supports thumbnail and smallThumbnail. However this does cause certain books to not have images available.
+        image: book.volumeInfo.imageLinks.thumbnail.replaceAll('1'),
+        link: book.volumeInfo.infoLink
       }));
 
       setSearchedBooks(bookData);
@@ -125,6 +127,7 @@ const SearchBooks = () => {
                   <Card.Img src={book.image} alt={`The cover for ${book.title}`} variant='top' />
                 ) : null}
                 <Card.Body>
+                  <a href={book.link} target="_blank" rel="noopener noreferrer">Link to Book!</a>
                   <Card.Title>{book.title}</Card.Title>
                   <p className='small'>Authors: {book.authors}</p>
                   <Card.Text>{book.description}</Card.Text>
