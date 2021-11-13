@@ -47,7 +47,9 @@ const SearchBooks = () => {
         title: book.volumeInfo.title,
         description: book.volumeInfo.description,
         // Changed thumbnail to find higher quality image. Volumes only supports thumbnail and smallThumbnail. However this does cause certain books to not have images available.
-        image: book.volumeInfo.imageLinks.thumbnail.replaceAll('1'),
+        // Commented out higher quality. As of right now it does not work properly with Firefox. Chrome it loads. Firefox leaves a gray placeholder.
+        // image: book.volumeInfo.imageLinks.thumbnail.replaceAll('1'),
+        image: book.volumeInfo.imageLinks?.thumbnail || '',
         link: book.volumeInfo.infoLink
       }));
 
